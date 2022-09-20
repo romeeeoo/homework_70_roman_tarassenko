@@ -2,18 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Title</title>
 </head>
 <body>
-<h1>Task</h1>
-{% for task in tasks %}
-    <h2>{{ task.description }}</h2>
-    <p>Status: {{ task.status }}</p>
-    {% if task.deadline %}
-        <p>Deadline: {{ task.deadline }}</p>
-    {% endif %}
-    <p><a href="#">edit...</a></p>
-    <hr>
-{% endfor %}
+<div class="container">
+    <div class="row">
+        <a class="btn btn-primary" href="add/">ADD NEW TASK</a>
+    </div>
+    <div class="row">
+        <h1>All Tasks</h1>
+    </div>
+    {% for task in tasks %}
+        <div class="row">
+            <h2>{{ task.description }}</h2>
+            <p>Status: {{ task.status }}</p>
+            {% if task.deadline %}
+                <p>Deadline: {{ task.deadline }}</p>
+            {% endif %}
+            <p><a href="#">edit...</a></p>
+            <hr>
+        </div>
+    {% endfor %}
+</div>
 </body>
 </html>
