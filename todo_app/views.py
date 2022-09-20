@@ -16,13 +16,7 @@ def add_view(request):
         description = request.POST.get('description'),
         status = request.POST.get('status'),
         deadline = request.POST.get('deadline')
-        new_task = Task.objects.create(description=description, status=status,
+        new_task = Task.objects.create(description=description[0], status=status[0],
                                        deadline=deadline)
-        # new_task = Task()
-        # new_task.description = request.POST.get('description')
-        # new_task.description = request.POST.get('status')
-        # new_task.deadline = request.POST.get('deadline')
-        print(f"this is new task {new_task}")
-        print(Task.objects.all())
         new_task.save()
         return redirect("index_view")
