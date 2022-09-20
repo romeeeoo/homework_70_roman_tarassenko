@@ -1,0 +1,68 @@
+[
+{
+  "model": "todo_app.task",
+  "pk": 1,
+  "fields": {
+    "description": "Make migration",
+    "status": "new",
+    "deadline": null,
+    "created_at": "2022-09-19T19:26:20.478Z",
+    "updated_at": "2022-09-19T19:26:20.478Z"
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 2,
+  "fields": {
+    "description": "create fixture",
+    "status": "done",
+    "deadline": "2022-09-13",
+    "created_at": "2022-09-19T19:53:05.231Z",
+    "updated_at": "2022-09-19T19:53:05.231Z"
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 3,
+  "fields": {
+    "description": "add template",
+    "status": "in_process",
+    "deadline": "2022-09-19",
+    "created_at": "2022-09-19T19:53:11.200Z",
+    "updated_at": "2022-09-19T19:53:11.200Z"
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 4,
+  "fields": {
+    "description": "style files",
+    "status": "done",
+    "deadline": null,
+    "created_at": "2022-09-19T19:53:22.700Z",
+    "updated_at": "2022-09-19T19:53:22.700Z"
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 5,
+  "fields": {
+    "description": "create app",
+    "status": "new",
+    "deadline": "2022-09-13",
+    "created_at": "2022-09-20T09:18:27.465Z",
+    "updated_at": "2022-09-20T09:18:27.465Z"
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 11,
+  "fields": {
+    "description": "Some other",
+    "status": "in_process",
+    "deadline": "2022-09-14",
+    "created_at": "2022-09-20T11:09:13.287Z",
+    "updated_at": "2022-09-20T11:09:13.295Z"
+  }
+}
+]
