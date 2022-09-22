@@ -15,6 +15,16 @@
         {% endif %}
     </div>
     <div class="row">
+        {% if task.deadline %}
+            <p> Created at: {{ task.created_at }}</p>
+        {% endif %}
+    </div>
+     <div class="row">
+        {% if task.deadline %}
+            <p> Updated at: {{ task.updated_at }}</p>
+        {% endif %}
+    </div>
+    <div class="row">
         <p>Deadline: {{ task.detailed_description }}</p>
     </div>
     <div class="row">
