@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} {{ task.description }} {% endblock %}
+{% block title %} Task: {{ task.description }} {% endblock %}
 
 {% block content %}
     <div class="row">
@@ -25,7 +25,7 @@
         {% endif %}
     </div>
     <div class="row">
-        <p>Deadline: {{ task.detailed_description }}</p>
+        <p>Detailed description: {{ task.detailed_description }}</p>
     </div>
     <div class="row">
         <a href="#">edit...</a>
