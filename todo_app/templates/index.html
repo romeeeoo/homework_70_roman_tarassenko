@@ -1,29 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <title>Title</title>
-</head>
-<body>
-<div class="container">
-    <div class="row">
-        <a class="btn btn-primary" href="add/">ADD NEW TASK</a>
-    </div>
-    <div class="row">
-        <h1>All Tasks</h1>
-    </div>
+{% extends "base.html" %}
+
+{% block title %} All Tasks {% endblock %}
+
+{% block content %}
     {% for task in tasks %}
-        <div class="row">
-            <h2>{{ task.description }}</h2>
-            <p>Status: {{ task.status }}</p>
-            {% if task.deadline %}
-                <p>Deadline: {{ task.deadline }}</p>
-            {% endif %}
-            <p><a href="#">edit...</a></p>
+        <div>
+            <div class="row">
+                <h2>{{ task.description }}</h2>
+            </div>
+            <div class="row">
+                <p>Status: {{ task.status }}</p>
+            </div>
+            <div class="row">
+                {% if task.deadline %}
+                    <p>Deadline: {{ task.deadline }}</p>
+                {% endif %}
+            </div>
+            <div class="row">
+                <a href="#">edit...</a>
+                <a href="{% url "detailed_task" task.pk %}">more...</a>
+            </div>
             <hr>
         </div>
     {% endfor %}
-</div>
-</body>
-</html>
+{% endblock %}
