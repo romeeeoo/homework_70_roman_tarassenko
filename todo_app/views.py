@@ -14,12 +14,21 @@ def add_view(request):
     if request.method == 'GET':
         return render(request, 'add_new_task.html')
     elif request.method == 'POST':
+        deadline = request.POST.get('deadline') if len(request.POST.get(
+            'deadline')) > 8 else None
         task_data = {'description': request.POST.get('description'),
                      'status': request.POST.get('status'),
-                     # 'deadline': request.POST.get('deadline'),
+                     'deadline': deadline,
                      'detailed_description': request.POST.get('detailed_description')
                      }
+        print(task_data)
         new_task = Task.objects.create(**task_data)
+        # description = request.POST.get('description'),
+        # status = request.POST.get('status'),
+        # deadline = request.POST.get('deadline')
+        # detailed_description = request.POST.get('detailed_description')
+        # new_task = Task.objects.create(description=description[0], status=status[0],
+        #                                deadline=deadline, detailed_description=detailed_description)
         return redirect("detailed_task", pk=new_task.pk)
 
 
