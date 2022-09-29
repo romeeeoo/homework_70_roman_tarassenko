@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
+from todo_app.forms import TaskForm
 from todo_app.models import Task
 
 
@@ -12,18 +13,20 @@ def index_view(request):
 
 def add_view(request):
     if request.method == 'GET':
-        return render(request, 'add_new_task.html')
+        form = TaskForm()
+        return render(request, 'add_new_task.html', context={'form': form})
     elif request.method == 'POST':
-        deadline = request.POST.get('deadline') if len(request.POST.get(
-            'deadline')) > 8 else None
-        task_data = {'description': request.POST.get('description'),
-                     'status': request.POST.get('status'),
-                     'deadline': deadline,
-                     'detailed_description': request.POST.get('detailed_description')
-                     }
-        print(task_data)
-        new_task = Task.objects.create(**task_data)
-        return redirect("detailed_task", pk=new_task.pk)
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            new_task = Task.objects.create(
+                description=form.cleaned_data['description'],
+                detailed_description=form.cleaned_data['detailed_description'],
+                status=form.cleaned_data['status'],
+                deadline=form.cleaned_data['deadline']
+            )
+            return redirect("detailed_task", pk=new_task.pk)
+        else:
+            return render(request, 'add_new_task.html', context={'form': form})
 
 
 def detail_view(request, pk):
