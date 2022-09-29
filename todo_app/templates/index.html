@@ -17,8 +17,8 @@
                 {% endif %}
             </div>
             <div class="row">
-                <a href="#">edit...</a>
-                <a href="{% url "detailed_task" task.pk %}">more...</a>
+                <a href="{% url 'update_task' task.pk  %}">edit...</a>
+                <a href="{% url 'detailed_task' task.pk %}">more...</a>
             </div>
             <hr>
         </div>

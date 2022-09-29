@@ -32,3 +32,24 @@ def add_view(request):
 def detail_view(request, pk):
     task = get_object_or_404(Task, pk=pk)
     return render(request, 'detailed_task.html', context={'task': task})
+
+
+def update_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task.description = form.cleaned_data['description']
+            task.detailed_description = form.cleaned_data['detailed_description']
+            task.status = form.cleaned_data['status']
+            task.deadline = form.cleaned_data['deadline']
+            task.save()
+            return redirect('detailed_task', pk=task.pk)
+    elif request.method == 'GET':
+        form = TaskForm(initial={
+            'description': task.description,
+            'detailed_description': task.detailed_description,
+            'status': task.status,
+            'deadline': task.deadline
+        })
+        return render(request, 'update_task.html', context={'task': task, 'form': form})
