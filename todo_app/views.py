@@ -53,3 +53,14 @@ def update_view(request, pk):
             'deadline': task.deadline
         })
         return render(request, 'update_task.html', context={'task': task, 'form': form})
+
+
+def delete_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    return render(request, 'task_confirm_delete.html', context={'task': task})
+
+
+def confirm_delete_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect('index')
