@@ -102,4 +102,3 @@ class ConfirmDeleteView(TemplateView):
         task = get_object_or_404(Task, pk=kwargs["pk"])
         task.delete()
         return redirect('index')
-    
