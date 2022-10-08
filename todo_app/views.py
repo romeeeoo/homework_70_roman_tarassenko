@@ -16,15 +16,6 @@ class IndexView(TemplateView):
         return context
 
 
-# def index_view(request):
-#     tasks = Task.objects.all()
-#     context = {'tasks': tasks}
-#     return render(request, 'index.html', context)
-
-
-
-
-
 def add_view(request):
     if request.method == 'GET':
         form = TaskForm()
@@ -43,9 +34,15 @@ def add_view(request):
             return render(request, 'add_new_task.html', context={'form': form})
 
 
-def detail_view(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    return render(request, 'detailed_task.html', context={'task': task})
+class TaskView(TemplateView):
+    template_name = "detailed_task.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["task"] = get_object_or_404(Task, pk=kwargs["pk"])
+        print(context)
+        return context
+
 
 
 def update_view(request, pk):
