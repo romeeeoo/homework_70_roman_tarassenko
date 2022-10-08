@@ -16,22 +16,38 @@ class IndexView(TemplateView):
         return context
 
 
-def add_view(request):
-    if request.method == 'GET':
+# def add_view(request):
+#     if request.method == 'GET':
+#         form = TaskForm()
+#         return render(request, 'add_new_task.html', context={'form': form})
+#     elif request.method == 'POST':
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             new_task = Task.objects.create(
+#                 description=form.cleaned_data['description'],
+#                 detailed_description=form.cleaned_data['detailed_description'],
+#                 status=form.cleaned_data['status'],
+#                 deadline=form.cleaned_data['deadline']
+#             )
+#             return redirect("detailed_task", pk=new_task.pk)
+#         else:
+#             return render(request, 'add_new_task.html', context={'form': form})
+
+class AddTaskView(TemplateView):
+    template_name = "add_new_task.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
         form = TaskForm()
-        return render(request, 'add_new_task.html', context={'form': form})
-    elif request.method == 'POST':
+        context["form"] = form
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
         form = TaskForm(request.POST)
         if form.is_valid():
-            new_task = Task.objects.create(
-                description=form.cleaned_data['description'],
-                detailed_description=form.cleaned_data['detailed_description'],
-                status=form.cleaned_data['status'],
-                deadline=form.cleaned_data['deadline']
-            )
-            return redirect("detailed_task", pk=new_task.pk)
-        else:
-            return render(request, 'add_new_task.html', context={'form': form})
+            task = form.save()
+            return redirect("detailed_task", pk=task.pk)
+        return render(request, "add_new_task.html", context={"form": form})
 
 
 class TaskView(TemplateView):
