@@ -3,21 +3,28 @@ from django.db import models
 
 # Create your models here.
 class TaskStatus(models.Model):
-    status = models.CharField(max_length=100, null=False, blank=False)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
-        return "{}".format(self.status)
+        return f"{self.name}"
+
+
+class TaskType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Task(models.Model):
-    description = models.CharField(max_length=200, null=False, blank=False)
-    deadline = models.DateField(null=True, blank=True)
-    detailed_description = models.TextField(null=True, blank=True, max_length=2000)
+    summary = models.CharField(max_length=200)
+    description = models.TextField(max_length=1000, null=True, blank=True)
+    status = models.ForeignKey(TaskStatus, on_delete=models.PROTECT)
+    types = models.ManyToManyField(to="todo_app.TaskType", related_name="tasks", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.ForeignKey(TaskStatus, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{}. {}".format(self.pk, self.description, self.status)
+        return "{}. {}".format(self.pk, self.summary)
 
 
