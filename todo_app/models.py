@@ -26,5 +26,3 @@ class Task(models.Model):
 
     def __str__(self):
         return "{}. {}".format(self.pk, self.summary)
-
-

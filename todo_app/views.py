@@ -85,12 +85,21 @@ class UpdateTaskView(TemplateView):
         return render(request, "add_new_task.html", context={"form": form})
 
 
-def delete_view(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    return render(request, 'task_confirm_delete.html', context={'task': task})
+class DeleteTaskView(TemplateView):
+    template_name = "task_confirm_delete.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["task"] = get_object_or_404(Task, pk=kwargs["pk"])
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
 
 
-def confirm_delete_view(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.delete()
-    return redirect('index')
+class ConfirmDeleteView(TemplateView):
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs["pk"])
+        task.delete()
+        return redirect('index')
+    
