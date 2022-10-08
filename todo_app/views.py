@@ -1,14 +1,28 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import TemplateView
 
 from todo_app.forms import TaskForm
 from todo_app.models import Task
 
 
 # Create your views here.
-def index_view(request):
-    tasks = Task.objects.all()
-    context = {'tasks': tasks}
-    return render(request, 'index.html', context)
+class IndexView(TemplateView):
+    template_name = "index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tasks"] = Task.objects.all()
+        print(context)
+        return context
+
+
+# def index_view(request):
+#     tasks = Task.objects.all()
+#     context = {'tasks': tasks}
+#     return render(request, 'index.html', context)
+
+
+
 
 
 def add_view(request):
