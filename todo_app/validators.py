@@ -1,5 +1,4 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import BaseValidator
 
 from todo_app import MIN_LENGTH, MAX_LENGTH
 

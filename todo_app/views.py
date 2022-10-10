@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView
 
 from todo_app.forms import TaskForm
 from todo_app.models import Task
@@ -12,7 +12,6 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tasks"] = Task.objects.all()
-        print(context)
         return context
 
 
@@ -25,12 +24,15 @@ class AddTaskView(TemplateView):
         context["form"] = form
         return self.render_to_response(context)
 
+
     def post(self, request, *args, **kwargs):
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save()
             return redirect("detailed_task", pk=task.pk)
         return render(request, "add_new_task.html", context={"form": form})
+
+
 
 
 class TaskView(TemplateView):
@@ -83,4 +85,3 @@ class ConfirmDeleteView(TemplateView):
         task = get_object_or_404(Task, pk=kwargs["pk"])
         task.delete()
         return redirect('index')
-
