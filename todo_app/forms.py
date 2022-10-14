@@ -1,6 +1,6 @@
 from django import forms
 
-from todo_app.models import TaskStatus, Task
+from todo_app.models import TaskStatus, Task, Project
 
 
 class TaskForm(forms.ModelForm):
@@ -16,3 +16,12 @@ class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="Найти")
 
 
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            "name",
+            "specification",
+            "start_date",
+            "project_deadline",
+        ]

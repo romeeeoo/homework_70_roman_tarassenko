@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} All Projects {% endblock %}
+
+{% block content %}
+    {% for project in projects %}
+        <div>
+            <div class="row">
+                <h2>{{ project.name }}</h2>
+            </div>
+              <div class="row">
+                <p>{{ project.specification }}</p>
+            </div>
+            <div class="row">
+                {% if project.start_date %}
+                    <p>Start date: {{ project.start_date }}</p>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if project.project_deadline %}
+                    <p>Start date: {{ project.project_deadline }}</p>
+                {% endif %}
+            </div>
+            <div class="row">
+{#                <a href="{% url 'update_task' task.pk %}">edit...</a>#}
+                <a href="{% url 'detailed_project' project.pk %}">more...</a>
+{#                <a href="{% url 'delete_task' task.pk %}">delete...</a>#}
+            </div>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock %}

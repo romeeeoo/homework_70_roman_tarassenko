@@ -59,7 +59,6 @@ class AddTaskView(TemplateView):
         context["form"] = form
         return self.render_to_response(context)
 
-
     def post(self, request, *args, **kwargs):
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -105,6 +104,7 @@ class UpdateTaskView(TemplateView):
 
 class DeleteTaskView(TemplateView):
     template_name = "task/task_confirm_delete.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["task"] = get_object_or_404(Task, pk=kwargs["pk"])

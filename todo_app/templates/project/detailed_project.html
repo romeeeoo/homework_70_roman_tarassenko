@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} Project: {{ project.name }} {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h2>{{ project.name }}</h2>
+    </div>
+    <div class="row">
+        <h5>{{ project.specification }}</h5>
+    </div>
+    <div class="row">
+        <p>Start Date: {{ project.start_date }}</p>
+    </div>
+    <div class="row">
+        <p>Deadline: {{ project.project_deadline }}</p>
+    </div>
+    {#    <div class="row">#}
+    {#        <a href="{% url 'update_task' task.pk %}">edit...</a>#}
+    {#        <a href="{% url 'delete_task' task.pk %}">delete...</a>#}
+    {#    </div>#}
+    <div>
+        <h3>Tasks:</h3>
+        {% for task in project.tasks.all %}
+            {% include "partial/tasks.html" %}
+        {% empty %}
+            <p class="not-found">No tasks at the project</p>
+        {% endfor %}
+    </div>
+{% endblock %}
