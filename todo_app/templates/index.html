@@ -3,6 +3,7 @@
 {% block title %} All Tasks {% endblock %}
 
 {% block content %}
+    {% include 'partial/simple_search.html' %}
     {% for task in tasks %}
         <div>
             <div class="row">
@@ -17,11 +18,16 @@
                 {% endif %}
             </div>
             <div class="row">
-                <a href="{% url 'update_task' task.pk  %}">edit...</a>
+                <a href="{% url 'update_task' task.pk %}">edit...</a>
                 <a href="{% url 'detailed_task' task.pk %}">more...</a>
                 <a href="{% url 'delete_task' task.pk %}">delete...</a>
             </div>
             <hr>
         </div>
+        {% empty %}
+        <p class="not-found">No tasks found</p>
     {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}

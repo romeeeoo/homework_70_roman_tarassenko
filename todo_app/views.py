@@ -1,18 +1,53 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
+from django.utils.http import urlencode
+from django.views.generic import TemplateView, ListView
 
-from todo_app.forms import TaskForm
+from todo_app.forms import TaskForm, SimpleSearchForm
 from todo_app.models import Task
 
 
 # Create your views here.
-class IndexView(TemplateView):
+# class IndexView(TemplateView):
+#     template_name = "index.html"
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["tasks"] = Task.objects.all()
+#         return context
+class IndexView(ListView):
     template_name = "index.html"
+    context_object_name = "tasks"
+    model = Task
+    paginate_by = 10
+    paginate_orphans = 1
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["tasks"] = Task.objects.all()
+    def get(self, request, *args, **kwargs):
+        self.form = self.get_search_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.search_value:
+            query = Q(summary__icontains=self.search_value) | Q(description__icontains=self.search_value)
+            queryset = queryset.filter(query)
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['form'] = self.form
+        if self.search_value:
+            context['query'] = urlencode({'search': self.search_value})
         return context
+
+    def get_search_form(self):
+        return SimpleSearchForm(self.request.GET)
+
+    def get_search_value(self):
+        if self.form.is_valid():
+            return self.form.cleaned_data['search']
+        return None
 
 
 class AddTaskView(TemplateView):

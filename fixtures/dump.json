@@ -234,6 +234,32 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2022-10-14T12:58:31.062Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "Project object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2022-10-14T13:04:27.069Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "39",
+    "object_repr": "39. ghrtfhfdthg",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -558,11 +584,47 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add project",
+    "content_type": 10,
+    "codename": "add_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change project",
+    "content_type": 10,
+    "codename": "change_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete project",
+    "content_type": 10,
+    "codename": "delete_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view project",
+    "content_type": 10,
+    "codename": "view_project"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$HIZtmJcrjpw40Kmtk9mzqM$bWyw+hsUYr2RjYrTD6IHk2tl/S7WwgMrMztUKgqU3sk=",
-    "last_login": "2022-10-08T10:33:14.465Z",
+    "last_login": "2022-10-14T12:55:29.865Z",
     "is_superuser": true,
     "username": "root",
     "first_name": "",
@@ -648,11 +710,27 @@
   }
 },
 {
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "todo_app",
+    "model": "project"
+  }
+},
+{
   "model": "sessions.session",
   "pk": "biftjzc4keaen671tckl4lz1qpithl0a",
   "fields": {
     "session_data": ".eJxVjMEOwiAQRP-FsyELFBo9evcbyLK7SNVAUtqT8d9tkx70Mod5b-atIq5LiWuXOU6sLsqo02-XkJ5Sd8APrPemqdVlnpLeFX3Qrm-N5XU93L-Dgr1sa0eAyCDWeEuQEqJ1wqMJmb0jAp-TJbI4OHLMgEZMOOdRjNsiDKA-XwpvOLs:1oh78s:WaNTjiEkEpN38_NLQUX4SyiJQuVYYclP7vAT190Bs5A",
     "expire_date": "2022-10-22T10:33:14.466Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "to9bnm5owhssujobl8ne3edq65zovxf9",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyELFBo9evcbyLK7SNVAUtqT8d9tkx70Mod5b-atIq5LiWuXOU6sLsqo02-XkJ5Sd8APrPemqdVlnpLeFX3Qrm-N5XU93L-Dgr1sa0eAyCDWeEuQEqJ1wqMJmb0jAp-TJbI4OHLMgEZMOOdRjNsiDKA-XwpvOLs:1ojKDp:MbnS5owDnoEgSqKE7GOyyhwSxkzMR0JSxQvxxMJAX2Q",
+    "expire_date": "2022-10-28T12:55:29.867Z"
   }
 },
 {
@@ -699,42 +777,14 @@
 },
 {
   "model": "todo_app.task",
-  "pk": 1,
+  "pk": 27,
   "fields": {
-    "summary": "Add Field",
-    "description": "add field with add field with add field with add field with add field with",
+    "summary": "Task Task Task",
+    "description": "Task Task Task Task Task Task Task",
     "status": 1,
-    "created_at": "2022-10-08T10:39:57.857Z",
-    "updated_at": "2022-10-08T10:41:04.098Z",
-    "types": [
-      1,
-      3
-    ]
-  }
-},
-{
-  "model": "todo_app.task",
-  "pk": 2,
-  "fields": {
-    "summary": "Fix page",
-    "description": "Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page Fix page",
-    "status": 2,
-    "created_at": "2022-10-08T10:41:30.497Z",
-    "updated_at": "2022-10-08T10:41:30.497Z",
-    "types": [
-      2
-    ]
-  }
-},
-{
-  "model": "todo_app.task",
-  "pk": 3,
-  "fields": {
-    "summary": "Create Instagram",
-    "description": "Create InstagramCreate InstagramCreate InstagramCreate InstagramCreate Instagram Create InstagramCreate InstagramCreate InstagramCreate Instagram Create InstagramCreate InstagramCreate InstagramCreate Instagram Create InstagramCreate InstagramCreate InstagramCreate InstagramCreate InstagramCreate Instagram Create Instagram Create InstagramCreate Instagram Create Instagram Create Instagram  Create Instagram Create Instagram Create Instagram Create Instagram Create Instagram Create Instagram Create Instagram Create Instagram Create Instagram",
-    "status": 2,
-    "created_at": "2022-10-08T10:42:14.132Z",
-    "updated_at": "2022-10-08T10:42:14.132Z",
+    "created_at": "2022-10-10T15:18:04.644Z",
+    "updated_at": "2022-10-10T15:18:04.644Z",
+    "project": 1,
     "types": [
       1
     ]
@@ -742,44 +792,75 @@
 },
 {
   "model": "todo_app.task",
-  "pk": 4,
+  "pk": 28,
   "fields": {
-    "summary": "Add user profile analytics",
-    "description": "user profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analyticsuser profile analytics",
-    "status": 1,
-    "created_at": "2022-10-08T10:42:53.790Z",
-    "updated_at": "2022-10-08T10:42:53.790Z",
+    "summary": "Bug Bug Bug",
+    "description": "Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug Bug",
+    "status": 3,
+    "created_at": "2022-10-10T15:18:32.373Z",
+    "updated_at": "2022-10-10T15:18:32.373Z",
+    "project": 1,
     "types": [
-      3
+      2
     ]
   }
 },
 {
   "model": "todo_app.task",
-  "pk": 5,
+  "pk": 29,
   "fields": {
-    "summary": "Create stories for the app",
-    "description": "stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories stories",
-    "status": 1,
-    "created_at": "2022-10-08T10:43:44.317Z",
-    "updated_at": "2022-10-08T10:43:44.317Z",
-    "types": [
-      1,
-      3
-    ]
-  }
-},
-{
-  "model": "todo_app.task",
-  "pk": 6,
-  "fields": {
-    "summary": "Add continuation of content feed with interesting section",
-    "description": "Once feed is finished user stops seeing any content in it. Adding suggested posts from interesting section should increase average daily hours spent in app",
+    "summary": "Fix something",
+    "description": "awdawdawdawdawd",
     "status": 2,
-    "created_at": "2022-10-08T10:50:06.451Z",
-    "updated_at": "2022-10-08T10:50:06.451Z",
+    "created_at": "2022-10-10T15:18:44.088Z",
+    "updated_at": "2022-10-10T17:17:13.087Z",
+    "project": 1,
     "types": [
-      1,
+      2
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 30,
+  "fields": {
+    "summary": "awdawfsefsef",
+    "description": "awfesfvesfcevfcsefc",
+    "status": 2,
+    "created_at": "2022-10-10T15:18:54.140Z",
+    "updated_at": "2022-10-10T15:18:54.140Z",
+    "project": 1,
+    "types": [
+      3
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 31,
+  "fields": {
+    "summary": "fdrgdrgdrg",
+    "description": "drgdrggwefsefsefsefsefsef",
+    "status": 3,
+    "created_at": "2022-10-10T15:19:03.273Z",
+    "updated_at": "2022-10-10T15:19:03.273Z",
+    "project": 1,
+    "types": [
+      2
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 32,
+  "fields": {
+    "summary": "thftghsegsefe",
+    "description": "sefsefrgdrgdrgfsefsef",
+    "status": 3,
+    "created_at": "2022-10-10T15:19:12.639Z",
+    "updated_at": "2022-10-10T15:21:30.966Z",
+    "project": 1,
+    "types": [
       2,
       3
     ]
@@ -787,17 +868,120 @@
 },
 {
   "model": "todo_app.task",
-  "pk": 7,
+  "pk": 33,
   "fields": {
-    "summary": "Avatar",
-    "description": "add functionality to add avatar to users profile",
-    "status": 3,
-    "created_at": "2022-10-08T10:50:50.758Z",
-    "updated_at": "2022-10-08T10:51:06.336Z",
+    "summary": "Local Page Bug",
+    "description": "sefsefrgdrgdrgfsefsefujyhrtgfgdrsbresrbgrgefgrbdrg",
+    "status": 2,
+    "created_at": "2022-10-10T15:19:38.840Z",
+    "updated_at": "2022-10-10T17:17:47.300Z",
+    "project": 1,
     "types": [
-      1,
       3
     ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 34,
+  "fields": {
+    "summary": "Main Page Bug",
+    "description": "sefsefrgdrgdrgfsefsef",
+    "status": 3,
+    "created_at": "2022-10-10T17:16:26.722Z",
+    "updated_at": "2022-10-10T17:16:26.722Z",
+    "project": 1,
+    "types": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 35,
+  "fields": {
+    "summary": "ST PITERfff",
+    "description": "awfaefsefse",
+    "status": 1,
+    "created_at": "2022-10-14T09:32:10.822Z",
+    "updated_at": "2022-10-14T09:32:10.823Z",
+    "project": 1,
+    "types": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 36,
+  "fields": {
+    "summary": "fsefsefsegg",
+    "description": "sefsefsefsefwdfawfgdtgrrrgd",
+    "status": 1,
+    "created_at": "2022-10-14T09:32:24.906Z",
+    "updated_at": "2022-10-14T09:32:24.906Z",
+    "project": 1,
+    "types": [
+      2
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 37,
+  "fields": {
+    "summary": "gdrgdrbftgyht",
+    "description": "esgdtgdrgef",
+    "status": 1,
+    "created_at": "2022-10-14T09:32:33.121Z",
+    "updated_at": "2022-10-14T09:32:33.121Z",
+    "project": 1,
+    "types": [
+      3
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 38,
+  "fields": {
+    "summary": "hujfydthdesfes",
+    "description": "gdrgtgrergsefesfsefsefsefsefse",
+    "status": 1,
+    "created_at": "2022-10-14T09:32:45.620Z",
+    "updated_at": "2022-10-14T09:32:45.620Z",
+    "project": 1,
+    "types": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "todo_app.task",
+  "pk": 39,
+  "fields": {
+    "summary": "ghrtfhfdthg",
+    "description": "rdgrdgdrgrg",
+    "status": 1,
+    "created_at": "2022-10-14T09:32:58.302Z",
+    "updated_at": "2022-10-14T13:04:27.064Z",
+    "project": 1,
+    "types": [
+      2
+    ]
+  }
+},
+{
+  "model": "todo_app.project",
+  "pk": 1,
+  "fields": {
+    "name": "Базовый уход за кожей",
+    "specification": "ыуаыушоащшрыуташуытадлу",
+    "start_date": "2022-10-14",
+    "project_deadline": "2022-10-22"
   }
 }
 ]

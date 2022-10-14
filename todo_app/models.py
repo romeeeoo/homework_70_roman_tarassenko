@@ -25,7 +25,18 @@ class Task(models.Model):
     types = models.ManyToManyField(to="todo_app.TaskType", related_name="tasks", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    project = models.ForeignKey(to="todo_app.Project", related_name="tasks", blank=True, on_delete=models.PROTECT,
+                                null=True)
+
 
     def __str__(self):
         return "{}. {}".format(self.pk, self.summary)
 
+class Project(models.Model):
+    name = models.CharField(max_length=200, validators=(min_length_validation,))
+    specification = models.TextField(null=True, blank=True)
+    start_date = models.DateField()
+    project_deadline = models.DateField()
+
+    def __str__(self):
+        return f"{self.pk}. {self.name}"
