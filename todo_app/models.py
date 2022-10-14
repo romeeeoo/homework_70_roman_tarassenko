@@ -27,10 +27,9 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(to="todo_app.Project", related_name="tasks", blank=True, on_delete=models.PROTECT,
                                 null=True)
-
-
     def __str__(self):
         return "{}. {}".format(self.pk, self.summary)
+
 
 class Project(models.Model):
     name = models.CharField(max_length=200, validators=(min_length_validation,))

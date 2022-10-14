@@ -16,7 +16,7 @@ from todo_app.models import Task
 #         context["tasks"] = Task.objects.all()
 #         return context
 class IndexView(ListView):
-    template_name = "index.html"
+    template_name = "task/index.html"
     context_object_name = "tasks"
     model = Task
     paginate_by = 10
@@ -51,7 +51,7 @@ class IndexView(ListView):
 
 
 class AddTaskView(TemplateView):
-    template_name = "add_new_task.html"
+    template_name = "task/add_new_task.html"
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
@@ -65,13 +65,13 @@ class AddTaskView(TemplateView):
         if form.is_valid():
             task = form.save()
             return redirect("detailed_task", pk=task.pk)
-        return render(request, "add_new_task.html", context={"form": form})
+        return render(request, "task/add_new_task.html", context={"form": form})
 
 
 
 
 class TaskView(TemplateView):
-    template_name = "detailed_task.html"
+    template_name = "task/detailed_task.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -81,7 +81,7 @@ class TaskView(TemplateView):
 
 
 class UpdateTaskView(TemplateView):
-    template_name = "update_task.html"
+    template_name = "task/update_task.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -100,11 +100,11 @@ class UpdateTaskView(TemplateView):
         if form.is_valid():
             task = form.save()
             return redirect("detailed_task", pk=task.pk)
-        return render(request, "add_new_task.html", context={"form": form})
+        return render(request, "task/add_new_task.html", context={"form": form})
 
 
 class DeleteTaskView(TemplateView):
-    template_name = "task_confirm_delete.html"
+    template_name = "task/task_confirm_delete.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["task"] = get_object_or_404(Task, pk=kwargs["pk"])
