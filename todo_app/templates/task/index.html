@@ -3,7 +3,7 @@
 {% block title %} All Tasks {% endblock %}
 
 {% block content %}
-    {% include 'partial/simple_search.html' %}
+    <div class="mt-4">{% include 'partial/simple_search.html' %}</div>
     <h1>Tasks:</h1>
     {% for task in tasks %}
         {% include "partial/tasks.html" %}

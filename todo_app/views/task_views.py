@@ -1,20 +1,13 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, UpdateView, DeleteView
 
 from todo_app.forms import TaskForm, SimpleSearchForm
 from todo_app.models import Task
 
 
-# Create your views here.
-# class IndexView(TemplateView):
-#     template_name = "index.html"
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["tasks"] = Task.objects.all()
-#         return context
 class IndexView(ListView):
     template_name = "task/index.html"
     context_object_name = "tasks"
@@ -67,8 +60,6 @@ class AddTaskView(TemplateView):
         return render(request, "task/add_new_task.html", context={"form": form})
 
 
-
-
 class TaskView(TemplateView):
     template_name = "task/detailed_task.html"
 
@@ -79,44 +70,50 @@ class TaskView(TemplateView):
         return context
 
 
-class UpdateTaskView(TemplateView):
+# class UpdateTaskView(TemplateView):
+#     template_name = "task/update_task.html"
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["task"] = get_object_or_404(Task, pk=kwargs["pk"])
+#         return context
+#
+#     def get(self, request, *args, **kwargs):
+#         context = self.get_context_data(**kwargs)
+#         form = TaskForm(instance=context["task"])
+#         context["form"] = form
+#         return self.render_to_response(context)
+#
+#     def post(self, request, *args, **kwargs):
+#         task = get_object_or_404(Task, pk=kwargs["pk"])
+#         form = TaskForm(request.POST, instance=task)
+#         if form.is_valid():
+#             task = form.save()
+#             return redirect("detailed_task", pk=task.pk)
+#         return render(request, "task/add_new_task.html", context={"form": form})
+
+
+# class CommentUpdateView(UpdateView):
+#     model = Comment
+#     template_name = 'comment/update.html'
+#     form_class = ArticleCommentForm
+#     context_object_name = 'comment'
+#
+#
+#     def get_success_url(self):
+#         return reverse('article_view', kwargs={'pk': self.object.article.pk})
+
+class UpdateTaskView(UpdateView):
+    model = Task
     template_name = "task/update_task.html"
+    form_class = TaskForm
+    context_object_name = "task"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["task"] = get_object_or_404(Task, pk=kwargs["pk"])
-        return context
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        form = TaskForm(instance=context["task"])
-        context["form"] = form
-        return self.render_to_response(context)
-
-    def post(self, request, *args, **kwargs):
-        task = get_object_or_404(Task, pk=kwargs["pk"])
-        form = TaskForm(request.POST, instance=task)
-        if form.is_valid():
-            task = form.save()
-            return redirect("detailed_task", pk=task.pk)
-        return render(request, "task/add_new_task.html", context={"form": form})
+    def get_success_url(self):
+        return reverse("detailed_project", kwargs={"pk": self.object.project.pk})
 
 
-class DeleteTaskView(TemplateView):
-    template_name = "task/task_confirm_delete.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["task"] = get_object_or_404(Task, pk=kwargs["pk"])
-        return context
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
-
-
-class ConfirmDeleteView(TemplateView):
-    def post(self, request, *args, **kwargs):
-        task = get_object_or_404(Task, pk=kwargs["pk"])
-        task.delete()
-        return redirect('index')
+class DeleteTaskView(DeleteView):
+    template_name = 'task/task_confirm_delete.html'
+    model = Task
+    success_url = reverse_lazy('index')
