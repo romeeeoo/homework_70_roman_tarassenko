@@ -4,6 +4,7 @@
 
 {% block content %}
     {% include 'partial/simple_search.html' %}
+    <h1>Tasks:</h1>
     {% for task in tasks %}
         {% include "partial/tasks.html" %}
     {% empty %}

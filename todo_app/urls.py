@@ -4,7 +4,7 @@ from todo_app.views import IndexView, TaskView, AddTaskView, UpdateTaskView, Del
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('add/', AddTaskView.as_view(), name='add_task'),
+    # path('add/', AddTaskView.as_view(), name='add_task'),
     path('task/<int:pk>/', TaskView.as_view(), name='detailed_task'),
     path('task/', IndexView.as_view(), name='task_no_pk'),
     path('task/<int:pk>/update/', UpdateTaskView.as_view(), name='update_task'),
