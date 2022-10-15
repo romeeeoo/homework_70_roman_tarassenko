@@ -27,7 +27,11 @@
         <p>Updated at: {{ task.updated_at }}</p>
     </div>
     <div class="row">
-        <a href="{% url 'update_task' task.pk %}">edit...</a>
-        <a href="{% url 'delete_task' task.pk %}">delete...</a>
+         <form action="{% url 'update_task' task.pk %}">
+            <input class="btn btn-outline-secondary mt-1 btn-sm" type="submit" value="edit"/>
+        </form>
+         <form action="{% url 'delete_task' task.pk %}">
+            <input class="btn btn-outline-danger mt-1 btn-sm" type="submit" value="delete"/>
+        </form>
     </div>
 {% endblock %}

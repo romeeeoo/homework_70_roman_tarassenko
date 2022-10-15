@@ -25,3 +25,14 @@ class ProjectForm(forms.ModelForm):
             "start_date",
             "project_deadline",
         ]
+
+
+class ProjectTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "summary",
+            "description",
+            "status",
+            "types",
+        ]

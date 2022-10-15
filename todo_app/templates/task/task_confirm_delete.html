@@ -32,13 +32,11 @@
         <p>Detailed description: {{ task.detailed_description }}</p>
     </div>
     <div class="row">
-        <a href="{% url 'update_task' task.pk %}">edit...</a>
-    </div>
-    <div class="row">
         <form action="{% url 'confirm_delete_task' task.pk %} " method="POST">
             {% csrf_token %}
-            <input type="submit" value="YES">
-            <a href="{% url 'index' %}">NO</a>
+            <input class="btn btn-outline-danger mt-5" type="submit" value="YES">
+            <a class="btn btn-primary mt-5" href="{% url 'index' %}" role="button">NO</a>
+            <a class="btn btn-outline-secondary mt-5" href="{% url 'update_task' task.pk %}">Edit</a>
         </form>
     </div>
 {% endblock %}

@@ -1,19 +1,25 @@
- <div>
-        <div class="row">
-            <h2>{{ task.summary }}</h2>
-        </div>
-        <div class="row">
-            <p>Status: {{ task.status }}</p>
-        </div>
-        <div class="row">
-            {% if task.deadline %}
-                <p>Deadline: {{ task.deadline }}</p>
-            {% endif %}
-        </div>
-        <div class="row">
-            <a href="{% url 'update_task' task.pk %}">edit...</a>
-            <a href="{% url 'detailed_task' task.pk %}">more...</a>
-            <a href="{% url 'delete_task' task.pk %}">delete...</a>
-        </div>
-        <hr>
+<div>
+    <div class="row">
+        <h2>{{ task.summary }}</h2>
     </div>
+    <div class="row">
+        <p>Status: {{ task.status }}</p>
+    </div>
+    <div class="row">
+        {% if task.deadline %}
+            <p>Deadline: {{ task.deadline }}</p>
+        {% endif %}
+    </div>
+    <div class="row">
+        <form action="{% url 'update_task' task.pk %}">
+            <input class="btn btn-outline-secondary mt-1 btn-sm" type="submit" value="edit"/>
+        </form>
+        <form action="{% url 'detailed_task' task.pk %}">
+            <input class="btn btn-primary mt-1 btn-sm" type="submit" value="more"/>
+        </form>
+         <form action="{% url 'delete_task' task.pk %}">
+            <input class="btn btn-outline-danger mt-1 btn-sm" type="submit" value="delete"/>
+        </form>
+    </div>
+    <hr>
+</div>
