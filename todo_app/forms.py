@@ -5,6 +5,8 @@ from todo_app.models import TaskStatus, Task, Project
 
 class TaskForm(forms.ModelForm):
     class Meta:
+        status = forms.ModelChoiceField(queryset=TaskStatus.objects.all(), initial=TaskStatus.objects.first())
+
         model = Task
         fields = ["summary",
                   "description",
@@ -28,6 +30,8 @@ class ProjectForm(forms.ModelForm):
 
 
 class ProjectTaskForm(forms.ModelForm):
+    status = forms.ModelChoiceField(queryset=TaskStatus.objects.all(), initial=TaskStatus.objects.filter(name="new"))
+
     class Meta:
         model = Task
         fields = [

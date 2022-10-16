@@ -69,7 +69,6 @@ class TaskView(TemplateView):
         print(context)
         return context
 
-
 # class UpdateTaskView(TemplateView):
 #     template_name = "task/update_task.html"
 #
