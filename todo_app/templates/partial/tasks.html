@@ -11,15 +11,18 @@
         {% endif %}
     </div>
     <div class="row">
-        <form action="{% url 'update_task' task.pk %}">
-            <input class="btn btn-outline-secondary mt-1 btn-sm" type="submit" value="edit"/>
-        </form>
+        {% if user.is_authenticated %}
+            <form action="{% url 'update_task' task.pk %}">
+                <input class="btn btn-outline-secondary mt-1 btn-sm" type="submit" value="edit"/>
+            </form>
+            <form action="{% url 'delete_task' task.pk %}">
+                <input class="btn btn-outline-danger mt-1 btn-sm" type="submit" value="delete"/>
+            </form>
+        {% endif %}
         <form action="{% url 'detailed_task' task.pk %}">
             <input class="btn btn-primary mt-1 btn-sm" type="submit" value="more"/>
         </form>
-         <form action="{% url 'delete_task' task.pk %}">
-            <input class="btn btn-outline-danger mt-1 btn-sm" type="submit" value="delete"/>
-        </form>
+
     </div>
     <hr>
 </div>

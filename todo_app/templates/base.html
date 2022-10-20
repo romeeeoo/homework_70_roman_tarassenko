@@ -22,15 +22,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'index' %}">all task</a>
                 </li>
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="{% url 'add_task' %}">add new task</a>#}
-{#                </li>#}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'all_projects' %}">all projects</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_project' %}">add projects</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_project' %}">add projects</a>
+                    </li>
+                     <li class="nav-item">
+                        <span class="nav-link">hi {{ user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">login</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
