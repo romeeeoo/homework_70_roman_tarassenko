@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %} New Task {% endblock %}
+
+{% block content %}
+<h1>Manage users for the "{{ project.name }}" project </h1>
+    <form action="" method="POST">
+       {%  include 'partial/project_task_form.html' with button_text="ADD" %}
+    </form>
+{% endblock %}

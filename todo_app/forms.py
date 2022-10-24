@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 from todo_app.models import TaskStatus, Task, Project
 
@@ -40,3 +41,15 @@ class ProjectTaskForm(forms.ModelForm):
             "status",
             "types",
         ]
+
+
+# class AddUserToProjectForm(forms.ModelForm):
+#     username = forms.ModelChoiceField(queryset=User.objects.all())
+#
+#     class Meta:
+#         model = User
+#         fields = ["username"]
+
+class AddUserToProjectForm(forms.Form):
+    user = forms.ModelChoiceField(queryset=User.objects.all())
+

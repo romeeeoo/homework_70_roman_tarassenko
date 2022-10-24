@@ -1,8 +1,8 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 
-from todo_app.forms import ProjectForm, ProjectTaskForm
+from todo_app.forms import ProjectForm, ProjectTaskForm, AddUserToProjectForm
 from todo_app.models import Project, Task
 
 
@@ -43,4 +43,55 @@ class ProjectTaskCreateView(CreateView):
         project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
         context["project"] = project
         return context
+
+
+class AddUserToProjectView(TemplateView):
+    template_name = "project/add_user_to_project.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        form = AddUserToProjectForm()
+        project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+        context["project"] = project
+        context["form"] = form
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        form = AddUserToProjectForm(request.POST)
+        project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+        context = self.get_context_data(**kwargs)
+        context["project"] = project
+        context["form"] = form
+        if form.is_valid():
+            user = form.cleaned_data.get("user")
+            print(user)
+            project.users.add(user)
+            return redirect("detailed_project", pk=project.pk)
+        return render(request, "project/add_user_to_project.html", context)
+
+
+# class RemoveUserFromProjectView(TemplateView):
+#     template_name = "project/add_user_to_project.html"
+#
+#     def get(self, request, *args, **kwargs):
+#         context = self.get_context_data(**kwargs)
+#         form = AddUserToProjectForm()
+#         project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+#         context["project"] = project
+#         context["form"] = form
+#         return self.render_to_response(context)
+#
+#     def post(self, request, *args, **kwargs):
+#         form = AddUserToProjectForm(request.POST)
+#         project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+#         context = self.get_context_data(**kwargs)
+#         context["project"] = project
+#         context["form"] = form
+#         if form.is_valid():
+#             user = form.cleaned_data.get("user")
+#             print(user)
+#             project.users.add(user)
+#             return redirect("detailed_project", pk=project.pk)
+#         return render(request, "project/add_user_to_project.html", context)
+
 
