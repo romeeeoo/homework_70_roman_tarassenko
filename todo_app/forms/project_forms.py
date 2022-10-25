@@ -16,7 +16,6 @@ class ProjectForm(forms.ModelForm):
 
 
 class ProjectTaskForm(forms.ModelForm):
-    # status = forms.ModelChoiceField(queryset=TaskStatus.objects.all(), initial=TaskStatus.objects.filter(name="new"))
 
     class Meta:
         model = Task
