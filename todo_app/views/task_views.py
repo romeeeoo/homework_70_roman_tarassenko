@@ -67,7 +67,6 @@ class TaskView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["task"] = get_object_or_404(Task, pk=kwargs["pk"])
-        print(context)
         return context
 
 # class UpdateTaskView(TemplateView):
@@ -126,8 +125,4 @@ class DeleteTaskView(PermissionRequiredMixin, DeleteView):
     def has_permission(self):
         task = get_object_or_404(Task, pk=self.kwargs.get("pk"))
         project = task.project
-        print(project)
-        print(self.request.user)
-        print(project.users.all())
-        print(self.request.user.has_perm('todo_app.delete_task'))
         return self.request.user in project.users.all() and self.request.user.has_perm('todo_app.delete_task')

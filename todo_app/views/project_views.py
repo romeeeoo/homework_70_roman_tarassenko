@@ -106,7 +106,6 @@ class RemoveUserFromProjectView(PermissionRequiredMixin, TemplateView):
         context["form"] = form
         if form.is_valid():
             user = form.cleaned_data.get("user")
-            print(user)
             project.users.remove(user)
             return redirect("detailed_project", pk=project.pk)
         return render(request, "project/remove_user_from_project.html", context)

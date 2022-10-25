@@ -1,12 +1,14 @@
 <form action="{% url "register" %}" method="POST">
     {% csrf_token %}
 
-{{ form.as_p }}
+    {{ form.as_p }}
 
-<input type="submit" value="Create account">
+    <input type="submit" value="Create account">
 
 
 </form>
+
+<a class="nav-link" href="{% url 'login' %}">login</a>
 
 
 
