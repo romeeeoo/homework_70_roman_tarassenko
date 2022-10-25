@@ -1,12 +1,12 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView
 
 from todo_app.forms import TaskForm, SimpleSearchForm
-from todo_app.models import Task, Project
+from todo_app.models import Task
 
 
 class IndexView(ListView):
