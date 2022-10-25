@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -6,7 +6,7 @@ from django.utils.http import urlencode
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView
 
 from todo_app.forms import TaskForm, SimpleSearchForm
-from todo_app.models import Task
+from todo_app.models import Task, Project
 
 
 class IndexView(ListView):
@@ -44,21 +44,21 @@ class IndexView(ListView):
         return None
 
 
-class AddTaskView(LoginRequiredMixin, TemplateView):
-    template_name = "task/add_new_task.html"
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        form = TaskForm()
-        context["form"] = form
-        return self.render_to_response(context)
-
-    def post(self, request, *args, **kwargs):
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            task = form.save()
-            return redirect("detailed_task", pk=task.pk)
-        return render(request, "task/add_new_task.html", context={"form": form})
+# class AddTaskView(LoginRequiredMixin, TemplateView):
+#     template_name = "task/add_new_task.html"
+#
+#     def get(self, request, *args, **kwargs):
+#         context = self.get_context_data(**kwargs)
+#         form = TaskForm()
+#         context["form"] = form
+#         return self.render_to_response(context)
+#
+#     def post(self, request, *args, **kwargs):
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             task = form.save()
+#             return redirect("detailed_task", pk=task.pk)
+#         return render(request, "task/add_new_task.html", context={"form": form})
 
 
 class TaskView(TemplateView):
@@ -103,7 +103,7 @@ class TaskView(TemplateView):
 #     def get_success_url(self):
 #         return reverse('article_view', kwargs={'pk': self.object.article.pk})
 
-class UpdateTaskView(LoginRequiredMixin, UpdateView):
+class UpdateTaskView(PermissionRequiredMixin, UpdateView):
     model = Task
     template_name = "task/update_task.html"
     form_class = TaskForm
@@ -112,8 +112,22 @@ class UpdateTaskView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse("detailed_project", kwargs={"pk": self.object.project.pk})
 
+    def has_permission(self):
+        task = get_object_or_404(Task, pk=self.kwargs.get("pk"))
+        project = task.project
+        return self.request.user in project.users.all()
 
-class DeleteTaskView(LoginRequiredMixin, DeleteView):
+
+class DeleteTaskView(PermissionRequiredMixin, DeleteView):
     template_name = 'task/task_confirm_delete.html'
     model = Task
     success_url = reverse_lazy('index')
+
+    def has_permission(self):
+        task = get_object_or_404(Task, pk=self.kwargs.get("pk"))
+        project = task.project
+        print(project)
+        print(self.request.user)
+        print(project.users.all())
+        print(self.request.user.has_perm('todo_app.delete_task'))
+        return self.request.user in project.users.all() and self.request.user.has_perm('todo_app.delete_task')

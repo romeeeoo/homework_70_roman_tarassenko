@@ -50,6 +50,9 @@ class ProjectTaskForm(forms.ModelForm):
 #         model = User
 #         fields = ["username"]
 
-class AddUserToProjectForm(forms.Form):
+class ManageUsersOnProjectForm(forms.Form):
     user = forms.ModelChoiceField(queryset=User.objects.all())
 
+
+class RemoveUserFromProjectForm(forms.Form):
+    user = forms.ModelChoiceField(queryset=User.objects.all())
