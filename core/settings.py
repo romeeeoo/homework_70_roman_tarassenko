@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'todo_app',
     'accounts',
+    'rest_framework',
+    'api',
 ]
 
 LOGIN_REDIRECT_URL = "index"
