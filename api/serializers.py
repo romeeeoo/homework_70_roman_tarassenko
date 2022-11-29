@@ -6,13 +6,15 @@ from todo_app.models import Project, Task, TaskStatus, TaskType
 class TaskTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskType
-        fields = ("name", "tasks")
+        fields = ("id", "name")
+        read_only_fields = ("id",)
 
 
 class TaskStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskStatus
-        fields = ("name",)
+        fields = ("id", "name")
+        read_only_fields = ("id",)
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -21,10 +23,12 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ("summary",
+        fields = ("id",
+                  "summary",
                   "description",
                   "status",
                   "types")
+
 
 #
 # class ProjectSerializer(serializers.Serializer):
@@ -44,7 +48,7 @@ class TaskSerializer(serializers.ModelSerializer):
 #         instance.save()
 
 class ProjectSerializer(serializers.ModelSerializer):
-    tasks = TaskSerializer(many=True, read_only=True)
+    tasks = TaskSerializer(many=True)
 
     class Meta:
         model = Project
@@ -57,8 +61,6 @@ class ProjectSerializer(serializers.ModelSerializer):
                   )
         read_only_fields = (
             "id", )
-
-
 
 
 
