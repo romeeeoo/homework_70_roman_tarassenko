@@ -32,6 +32,13 @@ class ProjectDetailView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, *args, **kwargs):
+        pk = kwargs.get("pk")
+        project = get_object_or_404(Project, pk=pk)
+        print(project)
+        project.delete()
+        return Response(pk, status=status.HTTP_200_OK)
+
 
 # class ProjectUpdateView(APIView):
 #     def put(self, request, *args, **kwargs):
@@ -50,12 +57,6 @@ class TaskDetailView(APIView):
         serializer = TaskSerializer(task)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-# class TaskUpdateView(UpdateAPIView):
-#     queryset = Task.objects.all()
-#     serializer_class = TaskSerializer
-
-class TaskUpdateView(APIView):
     def put(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs.get("pk"))
         serializer = TaskSerializer(data=request.data, instance=task)
@@ -66,12 +67,27 @@ class TaskUpdateView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class DeleteProjectView(APIView):
-    def delete(self, *args, **kwargs):
-        pk = kwargs.get("pk")
-        project = get_object_or_404(Project, pk=pk)
-        project.delete()
-        return Response(pk, status=status.HTTP_200_OK)
+# class TaskUpdateView(UpdateAPIView):
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
+
+# class TaskUpdateView(APIView):
+#     def put(self, request, *args, **kwargs):
+#         task = get_object_or_404(Task, pk=kwargs.get("pk"))
+#         serializer = TaskSerializer(data=request.data, instance=task)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+#         else:
+#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class DeleteProjectView(APIView):
+#     def delete(self, *args, **kwargs):
+#         pk = kwargs.get("pk")
+#         project = get_object_or_404(Project, pk=pk)
+#         project.delete()
+#         return Response(pk, status=status.HTTP_200_OK)
 
 
 class DeleteTaskView(APIView):

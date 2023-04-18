@@ -27,7 +27,7 @@ class Task(models.Model):
     types = models.ManyToManyField(to="todo_app.TaskType", related_name="tasks", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    project = models.ForeignKey(to="todo_app.Project", related_name="tasks", blank=True, on_delete=models.PROTECT,
+    project = models.ForeignKey(to="todo_app.Project", related_name="tasks", blank=True, on_delete=models.SET_NULL,
                                 null=True)
     is_deleted = models.BooleanField(default=False, null=False)
     deleted_at = models.DateTimeField(null=True, default=None)
