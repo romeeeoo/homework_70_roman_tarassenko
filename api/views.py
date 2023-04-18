@@ -17,7 +17,6 @@ class ProjectSimpleView(View):
 
 
 class ProjectDetailView(APIView):
-
     def get(self, request, *args, **kwargs):
         project = get_object_or_404(Project, pk=kwargs.get("pk"))
         serializer = ProjectSerializer(project)
@@ -39,7 +38,6 @@ class ProjectDetailView(APIView):
         project.delete()
         return Response(pk, status=status.HTTP_200_OK)
 
-
 # class ProjectUpdateView(APIView):
 #     def put(self, request, *args, **kwargs):
 #         project = get_object_or_404(Project, pk=kwargs.get("pk"))
@@ -49,6 +47,13 @@ class ProjectDetailView(APIView):
 #             return Response(serializer.data, status=status.HTTP_200_OK)
 #         else:
 #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class DeleteProjectView(APIView):
+#     def delete(self, *args, **kwargs):
+#         pk = kwargs.get("pk")
+#         project = get_object_or_404(Project, pk=pk)
+#         project.delete()
+#         return Response(pk, status=status.HTTP_200_OK)
 
 
 class TaskDetailView(APIView):
@@ -66,6 +71,11 @@ class TaskDetailView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, *args, **kwargs):
+        pk = kwargs.get("pk")
+        task = get_object_or_404(Task, pk=pk)
+        task.delete()
+        return Response(pk, status=status.HTTP_200_OK)
 
 # class TaskUpdateView(UpdateAPIView):
 #     queryset = Task.objects.all()
@@ -80,19 +90,3 @@ class TaskDetailView(APIView):
 #             return Response(serializer.data, status=status.HTTP_200_OK)
 #         else:
 #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# class DeleteProjectView(APIView):
-#     def delete(self, *args, **kwargs):
-#         pk = kwargs.get("pk")
-#         project = get_object_or_404(Project, pk=pk)
-#         project.delete()
-#         return Response(pk, status=status.HTTP_200_OK)
-
-
-class DeleteTaskView(APIView):
-    def delete(self, *args, **kwargs):
-        pk = kwargs.get("pk")
-        task = get_object_or_404(Task, pk=pk)
-        task.delete()
-        return Response(pk, status=status.HTTP_200_OK)

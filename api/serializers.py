@@ -27,12 +27,11 @@ class TaskSerializer(serializers.ModelSerializer):
                   "summary",
                   "description",
                   "status",
-                  "types")
+                  "types",)
         read_only_fields = (
             "id",)
 
 
-#
 # class ProjectSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
 #     name = serializers.CharField(max_length=200, required=True, allow_blank=False)
@@ -63,6 +62,3 @@ class ProjectSerializer(serializers.ModelSerializer):
                   )
         read_only_fields = (
             "id",)
-
-
-
