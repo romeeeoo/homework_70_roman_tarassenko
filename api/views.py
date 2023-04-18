@@ -23,7 +23,7 @@ class ProjectDetailView(APIView):
         serializer = ProjectSerializer(project)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         project = get_object_or_404(Project, pk=kwargs.get("pk"))
         serializer = ProjectSerializer(data=request.data, instance=project)
         if serializer.is_valid():
