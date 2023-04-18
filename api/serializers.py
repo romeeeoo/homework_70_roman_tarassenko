@@ -18,8 +18,8 @@ class TaskStatusSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    status = TaskStatusSerializer()
-    types = TaskTypeSerializer(many=True)
+    status = TaskStatusSerializer(read_only=True)
+    types = TaskTypeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
@@ -28,6 +28,8 @@ class TaskSerializer(serializers.ModelSerializer):
                   "description",
                   "status",
                   "types")
+        read_only_fields = (
+            "id",)
 
 
 #
@@ -48,7 +50,7 @@ class TaskSerializer(serializers.ModelSerializer):
 #         instance.save()
 
 class ProjectSerializer(serializers.ModelSerializer):
-    tasks = TaskSerializer(many=True)
+    tasks = TaskSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project
@@ -60,7 +62,7 @@ class ProjectSerializer(serializers.ModelSerializer):
                   "tasks"
                   )
         read_only_fields = (
-            "id", )
+            "id",)
 
 
 

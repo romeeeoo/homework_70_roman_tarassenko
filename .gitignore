@@ -3,3 +3,4 @@ __pycache__
 venv
 .idea
 queries.py
+.DS_Store
